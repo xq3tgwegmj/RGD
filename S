@@ -124,6 +124,7 @@ game.Workspace.ChildAdded:Connect(function(c)
 end)
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "Bottle's RGD Scripts",
-   Text = "Loaded"
+   Title = "Title",
+   Text = "Sub",
+   Icon = "http://www.roblox.com/asset/?id=9404754514"
 })

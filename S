@@ -1,0 +1,110 @@
+-- FREEZE DROIDS (in current room) - Keybind | F
+game:GetService("UserInputService").InputBegan:connect(function(input, processed)
+	if not processed then
+		if input.KeyCode == Enum.KeyCode.F then
+			for _, v in pairs(game.Workspace.Room.Enemies:GetDescendants()) do
+                if v:IsA("Humanoid") then
+                    v.WalkSpeed = 0
+                    v:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                        v.WalkSpeed = 0
+                    end)
+                end
+            end
+		end
+	end
+end)
+
+-- KILL DROIDS (in current room) - Keybind | K - --DON'T OVERUSE CAN LEAD TO BAN (run is timed)--
+game:GetService("UserInputService").InputBegan:connect(function(input, processed)
+	if not processed then
+		if input.KeyCode == Enum.KeyCode.K then
+			for _, v in pairs(game.Workspace.Room.Enemies:GetDescendants()) do
+                if v:IsA("Humanoid") then
+                    v.Health = 0
+                end
+            end
+		end
+	end
+end)
+
+-- FREEZE ALL FUTURE ANTI DROIDS (to be used to kill friendlies later)
+game:GetService("Workspace").PassiveDroids.ChildAdded:Connect(function(c)
+    c:WaitForChild("Humanoid").WalkSpeed = 0
+end)
+
+-- AUTO COLLECT CIRCUITS
+game.Workspace.ChildAdded:Connect(function(c)
+    if string.find(c.Name,"Circuit") then
+        wait(0.1)
+        firetouchinterest(game.Players.LocalPlayer.Character.Head, c, 0)
+    elseif c.Name == "Room" then
+        wait(0.3)
+        for _, v in pairs(c:GetChildren()) do
+            if string.find(v.Name,"Circuit") then
+                wait(0.1)
+                firetouchinterest(game.Players.LocalPlayer.Character.Head, v, 0)
+            end
+        end
+    end
+end)
+
+-- FREEZE LAVA/WATER/QUICKSAND
+game.Workspace.ChildAdded:Connect(function(c)
+    if c.Name == "Room" then
+        wait(0.5)
+        for _, v in pairs(c:GetDescendants()) do
+            if v.Name == "Killer" then
+                v:Destroy()
+            elseif string.find(v.Name,"Water") and not v:IsA("Script") then
+                v.CanCollide = true
+                v.Transparency = 0
+            elseif string.find(v.Name,"Lava") and not v:IsA("Script") then
+                v.CanTouch = false
+                v.Material = Enum.Material.Slate
+                v.Transparency = 0.3
+                v.BrickColor = BrickColor.new("Cocoa")
+            elseif v.Name == "Mud" or v.Name == "Chasm" then
+                v.Material = Enum.Material.SmoothPlastic
+                v.CanCollide = true
+            end
+        end
+    end
+end)
+
+-- DELETE BULLETS
+game.Workspace.ChildAdded:Connect(function(c)
+    if c.Name == "Bullet" then
+        c.CanTouch = false
+        c.CanCollide = false
+        c.Transparency = 1
+    end
+end)
+
+-- DELETE ICICLES
+game.Workspace.ChildAdded:Connect(function(c)
+    if c.Name == "Room" then
+        wait(0.3)
+        for _, droid in pairs(c:WaitForChild("Enemies"):GetChildren()) do
+            if droid:FindFirstChild("Icicles") then
+                droid:WaitForChild("Icicles").ChildAdded:Connect(function(icicle)
+                    icicle.CanTouch = false
+                    icicle:GetPropertyChangedSignal("CanTouch"):Connect(function()
+                        icicle.CanTouch = false
+                    end)
+                    icicle.Transparency = 1
+                end)
+            end
+        end
+        c.Enemies.ChildAdded:Connect(function(droid)
+            if droid:FindFirstChild("Icicles") then
+                droid:WaitForChild("Icicles").ChildAdded:Connect(function(icicle)
+                    icicle.CanTouch = false
+                    icicle:GetPropertyChangedSignal("CanTouch"):Connect(function()
+                        icicle.CanTouch = false
+                    end)
+                    icicle.Transparency = 1
+                end)
+            end
+        end)
+    end
+end)

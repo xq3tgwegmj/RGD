@@ -108,3 +108,8 @@ game.Workspace.ChildAdded:Connect(function(c)
         end)
     end
 end)
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+   Title = "Bottle's RGD Scripts",
+   Text = "Loaded"
+})

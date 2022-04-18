@@ -1,3 +1,17 @@
+--// RANDOMLY GENERATED DROIDS SCRIPTS \\--
+
+--[[
+Scripts:
+    --Keybinds--
+     o Freeze droids (F)
+     o Kill droids (K) - DON'T OVERUSE | FAST COMPLETION LEADS TO BAN
+    --Autos--
+     o Auto collect circuits
+     o Auto freeze lava, water, quicksand
+     o Auto delete bullets + icicles
+     o Auto freeze future anti droids for preservation (use to kill friendlies)
+]]--
+
 -- FREEZE DROIDS (in current room) - Keybind | F
 game:GetService("UserInputService").InputBegan:connect(function(input, processed)
 	if not processed then

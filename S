@@ -9,6 +9,7 @@ Scripts:
      o Auto collect circuits
      o Auto freeze lava, water, quicksand
      o Auto delete bullets + icicles
+     o Auto puzzle box completion
      o Auto freeze future anti droids for preservation (use to kill friendlies)
 ]]--
 
@@ -128,3 +129,25 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
    Text = "Loaded",
    Icon = "http://www.roblox.com/asset/?id=9405011319"
 })
+
+-- PUZZLE BOXES
+function teleport(room,box)
+    for _, v in pairs(room:GetChildren()) do
+        if string.find(v.Name,"PressurePlate") then
+            if box.Name:sub(11) == v.Name:sub(15) then
+                box.Box.Position = v.Activator.Position
+            end
+        end
+    end
+end
+
+game.Workspace.ChildAdded:Connect(function(c)
+    if c.Name == "Room" then
+        wait(0.5)
+        for _, v in pairs(c:WaitForChild("Enemies"):GetChildren()) do
+            if string.find(v.Name,"Puzzle") then
+                teleport(c,v)
+            end
+        end
+    end
+end)

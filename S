@@ -124,12 +124,6 @@ game.Workspace.ChildAdded:Connect(function(c)
     end
 end)
 
-game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "Bottle's RGD Scripts",
-   Text = "Loaded",
-   Icon = "http://www.roblox.com/asset/?id=9405011319"
-})
-
 -- PUZZLE BOXES
 function teleport(room,box)
     for _, v in pairs(room:GetChildren()) do
@@ -151,3 +145,9 @@ game.Workspace.ChildAdded:Connect(function(c)
         end
     end
 end)
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+   Title = "Bottle's RGD Scripts",
+   Text = "Loaded",
+   Icon = "http://www.roblox.com/asset/?id=9405011319"
+})

@@ -10,7 +10,7 @@ Scripts:
      o Auto freeze lava, water, quicksand
      o Auto delete bullets + icicles
      o Auto puzzle box completion
-     o Auto freeze future anti droids for preservation (use to kill friendlies)
+     o Auto freeze anti droids for preservation (use to kill friendlies)
 ]]--
 
 -- FREEZE DROIDS (in current room) - Keybind | F

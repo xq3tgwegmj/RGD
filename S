@@ -8,7 +8,7 @@ Scripts:
     --Autos--
      o Auto collect circuits
      o Auto freeze lava, water, quicksand
-     o Auto delete bullets + icicles
+     o Auto delete bullets + icicles + tornados
      o Auto puzzle box completion
      o Auto freeze anti droids for preservation (use to kill friendlies)
 ]]--
@@ -88,7 +88,7 @@ end)
 
 -- DELETE BULLETS
 game.Workspace.ChildAdded:Connect(function(c)
-    if c.Name == "Bullet" then
+    if c.Name == "Bullet" or c.Name == "Tornado" then
         c.CanTouch = false
         c.CanCollide = false
         c.Transparency = 1
@@ -138,7 +138,7 @@ end
 game.Workspace.ChildAdded:Connect(function(c)
     if c.Name == "Room" then
         wait(0.5)
-        for _, v in pairs(c:WaitForChild("Enemies"):GetChildren()) do
+        for _, v in pairs(c:GetChildren()) do
             if string.find(v.Name,"Puzzle") then
                 teleport(c,v)
             end

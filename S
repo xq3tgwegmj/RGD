@@ -86,41 +86,12 @@ game.Workspace.ChildAdded:Connect(function(c)
     end
 end)
 
--- DELETE BULLETS
+-- DELETE BULLETS + ICICLES + TORNADOES
 game.Workspace.ChildAdded:Connect(function(c)
-    if c.Name == "Bullet" or c.Name == "Tornado" then
+    if c.Name == "Bullet" or c.Name == "Tornado" or c.Name == "GigaIcicle" then
         c.CanTouch = false
         c.CanCollide = false
         c.Transparency = 1
-    end
-end)
-
--- DELETE ICICLES
-game.Workspace.ChildAdded:Connect(function(c)
-    if c.Name == "Room" then
-        wait(0.3)
-        for _, droid in pairs(c:WaitForChild("Enemies"):GetChildren()) do
-            if droid:FindFirstChild("Icicles") then
-                droid:WaitForChild("Icicles").ChildAdded:Connect(function(icicle)
-                    icicle.CanTouch = false
-                    icicle:GetPropertyChangedSignal("CanTouch"):Connect(function()
-                        icicle.CanTouch = false
-                    end)
-                    icicle.Transparency = 1
-                end)
-            end
-        end
-        c.Enemies.ChildAdded:Connect(function(droid)
-            if droid:FindFirstChild("Icicles") then
-                droid:WaitForChild("Icicles").ChildAdded:Connect(function(icicle)
-                    icicle.CanTouch = false
-                    icicle:GetPropertyChangedSignal("CanTouch"):Connect(function()
-                        icicle.CanTouch = false
-                    end)
-                    icicle.Transparency = 1
-                end)
-            end
-        end)
     end
 end)
 
